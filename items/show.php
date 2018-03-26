@@ -150,7 +150,7 @@
     	<div><audio src="<?php echo $cocoon_mp3_file ?>" controls width="700"></audio></div>
     <?php endif; ?>
     
-    <?php if ($dc_identifier || $item_from_dastum): ?>
+    <?php if ($dc_identifier && $item_from_dastum): ?>
     	<div>Cet enregistrement sonore peut-être consulté en ligne sur la médiathèque de Dastum en suivant ce lien : 
     	<a href="<?php echo implode(" / ", $dc_identifier); ?>"><?php echo implode(" / ", $dc_identifier); ?></a></div> 
     <?php endif; ?>         
