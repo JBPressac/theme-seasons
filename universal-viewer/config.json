@@ -1,0 +1,16 @@
+{
+  "options": {
+    "overrideFullScreen": false,
+    "leftPanelEnabled": true
+  },
+  "modules": {
+    "footerPanel": {
+      "options": {
+        "downloadEnabled": false,
+        "embedEnabled": false,
+        "fullscreenEnabled": true,
+        "minimiseButtons": false
+      }
+    }
+  }
+}
