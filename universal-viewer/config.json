@@ -4,6 +4,7 @@
     "leftPanelEnabled": true
   },
   "modules": {
+<<<<<<< HEAD
     "footerPanel": {
       "options": {
         "downloadEnabled": false,
@@ -12,5 +13,8 @@
         "minimiseButtons": false
       }
     }
+=======
+
+>>>>>>> 55e174091be4421e912fc9ffbe93f6268157c783
   }
 }
