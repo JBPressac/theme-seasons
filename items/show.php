@@ -103,48 +103,49 @@
 			}
 ?>
 
+<?php if ((get_theme_option('Item FileGallery') == 0) && metadata('item', 'has files')): ?>
+<?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
+<?php endif; ?>
+
+<?php
+$files = $item->Files;
+if ($files) {
+	echo $this->universalViewer($item);
+}
+?>
+
 <div id="primary">
-
-    <?php if ((get_theme_option('Item FileGallery') == 0) && metadata('item', 'has files')): ?>
-    <?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
-    <?php endif; ?>
-
 	<?php
-		$files = $item->Files;
-		if ($files) {
-			// Lien pour télécharger le fichier PDF
-			if ($collection_name == 'Registres du bagne de Brest') {
-				echo $this->universalViewer($item);
-				$html =	'
-				<script type="text/javascript">
-					function showDiv() {
-						document.getElementById(\'pdf-item-download\').style.display = "block";
-					}
-				</script>
+	if ($files) {
+		// Lien pour télécharger le fichier PDF
+		if ($collection_name == 'Registres du bagne de Brest') {
+			$html =	'
+			<script type="text/javascript">
+				function showDiv() {
+					document.getElementById(\'pdf-item-download\').style.display = "block";
+				}
+			</script>
 
-				<div>
-					<p>Prenez connaissance et approuvez les <a href="/conditions-generales-utilisation" target="_blank">conditions générales d\'utilisation</a> (CGU) avant de pouvoir télécharger les documents au format PDF.</p>
-					<p><input type="checkbox" name="answer" value="Show Div" onclick="showDiv()" /> J\'ai lu et j\'approuve les <a href="/conditions-generales-utilisation" target="_blank">conditions générales d\'utilisation</a>.</p>
-				</div>
-				<div id="pdf-item-download" style="display:none;">
-				';
-			}
-			else {
-				// Ajout pour utilisation du plugin Bookreader
-				// fire_plugin_hook('book_reader_item_show', array('view' => $this,'item' => $item,));
-				echo $this->getBookReader();
-				$html =	'<div id="pdf-item-download">';
-			}
-			foreach ($files as $file) {
-				if ($file->mime_type == 'application/pdf'):
-					$linkAttrs = array('href' => $file->getWebPath('original'));
-					$html .= 'Télécharger les documents au format PDF : <a ' . tag_attributes($linkAttrs) . '>' . $file->filename .
-					'</a> ('. $file->size . ' octets)';
-				endif;
-			}
-			$html .= '</div>';
-			echo $html;
+			<div>
+				<p>Prenez connaissance et approuvez les <a href="/conditions-generales-utilisation" target="_blank">conditions générales d\'utilisation</a> (CGU) avant de pouvoir télécharger les documents au format PDF.</p>
+				<p><input type="checkbox" name="answer" value="Show Div" onclick="showDiv()" /> J\'ai lu et j\'approuve les <a href="/conditions-generales-utilisation" target="_blank">conditions générales d\'utilisation</a>.</p>
+			</div>
+			<div id="pdf-item-download" style="display:none;">
+			';
 		}
+		else {
+			$html =	'<div id="pdf-item-download">';
+		}
+		foreach ($files as $file) {
+			if ($file->mime_type == 'application/pdf'):
+				$linkAttrs = array('href' => $file->getWebPath('original'));
+				$html .= 'Télécharger les documents au format PDF : <a ' . tag_attributes($linkAttrs) . '>' . $file->filename .
+				'</a> ('. $file->size . ' octets)';
+			endif;
+		}
+		$html .= '</div>';
+		echo $html;
+	}
 	?>
 
     <?php if ($item_from_cocoon): ?>
