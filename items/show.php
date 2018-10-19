@@ -10,6 +10,7 @@
 	$dc_date_created = metadata('item', array('Dublin Core', 'Date Created'), array('all' => true));
 	$dc_description = metadata('item', array('Dublin Core', 'Description'), array('all' => true));
 	$dc_identifier = metadata('item', array('Dublin Core', 'Identifier'), array('all' => true));
+	$dc_is_referenced_by = metadata('item', array('Dublin Core', 'Is Referenced By'), array('all' => true));
 	$dc_language = metadata('item', array('Dublin Core', 'Language'), array('all' => true));
 	$dc_medium = metadata('item', array('Dublin Core', 'Medium'), array('all' => true));
 	$dc_provenance = metadata('item', array('Dublin Core', 'Provenance'), array('all' => true));
@@ -324,6 +325,11 @@ if ($files) {
     	<?php if ($dc_source && $item_from_dastum): ?>
     		<h4>Cote du disque compact (CD) audio de conservation</h4>
 			<div class="element-text"><?php echo implode(" / ", $dc_source); ?></div>
+    	<?php endif; ?>
+
+			<?php if ($dc_is_referenced_by): ?>
+    		<h4>Référencé par</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_referenced_by) . "</p>"; ?></div>
     	<?php endif; ?>
 
     	<?php if ($dc_publisher): ?>
