@@ -345,7 +345,7 @@ if ($files) {
     	<?php endif; ?>
 
 			<?php if ($dc_type): ?>
-    		<h4>Types de document</h4>
+    		<h4>Type(s) du document</h4>
 			<div class="element-text"><?php echo "<p>" . implode(" / ", $dc_type) . "</p>"; ?></div>
     	<?php endif; ?>
 
