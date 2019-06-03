@@ -9,6 +9,8 @@
 	$dc_date = metadata('item', array('Dublin Core', 'Date'), array('all' => true));
 	$dc_date_created = metadata('item', array('Dublin Core', 'Date Created'), array('all' => true));
 	$dc_description = metadata('item', array('Dublin Core', 'Description'), array('all' => true));
+	$dc_has_format = metadata('item', array('Dublin Core', 'Has Format'), array('all' => true));
+	$dc_has_version = metadata('item', array('Dublin Core', 'Has Version'), array('all' => true));
 	$dc_identifier = metadata('item', array('Dublin Core', 'Identifier'), array('all' => true));
 	$dc_is_referenced_by = metadata('item', array('Dublin Core', 'Is Referenced By'), array('all' => true));
 	$dc_language = metadata('item', array('Dublin Core', 'Language'), array('all' => true));
@@ -332,6 +334,21 @@ if ($files) {
 			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_referenced_by) . "</p>"; ?></div>
     	<?php endif; ?>
 
+			<?php if ($dc_has_format): ?>
+    		<h4>Autres formats</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_has_format) . "</p>"; ?></div>
+    	<?php endif; ?>
+
+			<?php if ($dc_has_version): ?>
+    		<h4>Autres versions</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_has_version) . "</p>"; ?></div>
+    	<?php endif; ?>
+
+			<?php if ($dc_type): ?>
+    		<h4>Types de document</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" / ", $dc_type) . "</p>"; ?></div>
+    	<?php endif; ?>
+
     	<?php if ($dc_publisher): ?>
     		<h4>Éditeur(s)</h4>
 			<div class="element-text"><?php echo implode(" / ", $dc_publisher); ?></div>
@@ -375,8 +392,6 @@ if ($files) {
         <div class="element-text"><?php echo tag_string('item'); ?></div>
     </div>
     <?php endif;?>
-
-	<?php fire_plugin_hook('public_items_show', array('view' => $this, 'item' => $item)); ?>
 
     <!-- The following prints a citation for this item. -->
     <div id="item-citation" class="element">
