@@ -296,19 +296,7 @@ if ($files || !empty($matches)) {
     	<?php endif; ?>
 
     	<?php
-			if ($dc_language && !$item_from_cocoon && !$item_from_dastum):
-				$patterns = array();
-				$patterns[0] = '/^fre$/';
-				$patterns[1] = '/^fra$/';
-				$patterns[2] = '/^bre$/';
-				$patterns[3] = '/^eng$/';
-				$replacements = array();
-				$replacements[3] = 'Français';
-				$replacements[2] = 'Français';
-				$replacements[1] = 'Breton';
-				$replacements[0] = 'Anglais';
-				$dc_language = preg_replace($patterns, $replacements, $dc_language);
-    	?>
+			if ($dc_language && !$item_from_cocoon && !$item_from_dastum):?>
     		<h4>Langue(s) utilisées dans le(s) document(s)</h4>
 			<div class="element-text"><?php echo implode(" / ", $dc_language); ?></div>
     	<?php endif; ?>
