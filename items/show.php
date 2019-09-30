@@ -112,7 +112,10 @@
 
 <?php
 $files = $item->Files;
-if ($files) {
+// Un lien vers un manifeste IIIF du service http://mshb.huma-num.fr/nakalaiiif/11280/
+// a -t-il été saisi dans dc:has_format (dc:à pour autre format).
+$matches  = preg_grep ('/http:\/\/mshb.huma-num.fr\/nakalaiiif\/11280\//', $dc_has_format);
+if ($files || !empty($matches)) {
 	echo $this->universalViewer($item);
 }
 ?>
