@@ -297,7 +297,7 @@ if ($files || !empty($matches)) {
 
     	<?php
 			if ($dc_language && !$item_from_cocoon && !$item_from_dastum):?>
-    		<h4>Langue(s) utilisées dans le(s) document(s)</h4>
+    		<h4>Langue(s) utilisées dans le(s) document(s) [<a href="https://iso639-3.sil.org/code_tables/639/data">code ISO 639</a>]</h4>
 			<div class="element-text"><?php echo implode(" / ", $dc_language); ?></div>
     	<?php endif; ?>
 
