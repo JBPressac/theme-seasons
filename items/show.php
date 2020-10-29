@@ -118,7 +118,10 @@
 
 <?php
 $files = $item->Files;
-if ($files) {
+// Un lien vers un manifeste IIIF du service http://mshb.huma-num.fr/nakalaiiif/11280/
+// a -t-il été saisi dans dc:has_format (dc:à pour autre format).
+$matches  = preg_grep ('/http:\/\/mshb.huma-num.fr\/nakalaiiif\/11280\//', $dc_has_format);
+if ($files || !empty($matches)) {
 	echo $this->universalViewer($item);
 }
 ?>
@@ -299,20 +302,8 @@ if ($files) {
     	<?php endif; ?>
 
     	<?php
-			if ($dc_language && !$item_from_cocoon && !$item_from_dastum):
-				$patterns = array();
-				$patterns[0] = '/^fre$/';
-				$patterns[1] = '/^fra$/';
-				$patterns[2] = '/^bre$/';
-				$patterns[3] = '/^eng$/';
-				$replacements = array();
-				$replacements[3] = 'Français';
-				$replacements[2] = 'Français';
-				$replacements[1] = 'Breton';
-				$replacements[0] = 'Anglais';
-				$dc_language = preg_replace($patterns, $replacements, $dc_language);
-    	?>
-    		<h4>Langue(s) utilisées dans le(s) document(s)</h4>
+			if ($dc_language && !$item_from_cocoon && !$item_from_dastum):?>
+    		<h4>Langue(s) utilisées dans le(s) document(s) [<a href="https://iso639-3.sil.org/code_tables/639/data">code ISO 639</a>]</h4>
 			<div class="element-text"><?php echo implode(" / ", $dc_language); ?></div>
     	<?php endif; ?>
 
