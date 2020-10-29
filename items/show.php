@@ -3,6 +3,7 @@
 <h1><?php echo metadata('item', array('Dublin Core', 'Title')); ?></h1>
 
 <?php
+	$dc_bibliographic_citation = metadata('item', array('Dublin Core', 'Bibliographic Citation'), array('all' => true));
 	$dc_contributor = metadata('item', array('Dublin Core', 'Contributor'), array('all' => true));
 	$dc_coverage = metadata('item', array('Dublin Core', 'Coverage'), array('all' => true));
 	$dc_creator = metadata('item', array('Dublin Core', 'Creator'), array('all' => true));
@@ -10,13 +11,18 @@
 	$dc_date_created = metadata('item', array('Dublin Core', 'Date Created'), array('all' => true));
 	$dc_description = metadata('item', array('Dublin Core', 'Description'), array('all' => true));
 	$dc_has_format = metadata('item', array('Dublin Core', 'Has Format'), array('all' => true));
+	$dc_has_part = metadata('item', array('Dublin Core', 'Has Part'), array('all' => true));
 	$dc_has_version = metadata('item', array('Dublin Core', 'Has Version'), array('all' => true));
 	$dc_identifier = metadata('item', array('Dublin Core', 'Identifier'), array('all' => true));
+	$dc_is_format_of = metadata('item', array('Dublin Core', 'Is Format Of'), array('all' => true));
 	$dc_is_referenced_by = metadata('item', array('Dublin Core', 'Is Referenced By'), array('all' => true));
+	$dc_is_part_of = metadata('item', array('Dublin Core', 'Is Part Of'), array('all' => true));
+	$dc_is_version_of = metadata('item', array('Dublin Core', 'Is Version Of'), array('all' => true));
 	$dc_language = metadata('item', array('Dublin Core', 'Language'), array('all' => true));
 	$dc_medium = metadata('item', array('Dublin Core', 'Medium'), array('all' => true));
 	$dc_provenance = metadata('item', array('Dublin Core', 'Provenance'), array('all' => true));
 	$dc_publisher = metadata('item', array('Dublin Core', 'Publisher'), array('all' => true));
+	$dc_references = metadata('item', array('Dublin Core', 'References'), array('all' => true));
 	$dc_relation = metadata('item', array('Dublin Core', 'Relation'), array('all' => true));
 	$dc_rights = metadata('item', array('Dublin Core', 'Rights'), array('all' => true));
 	$dc_rights_holder = metadata('item', array('Dublin Core', 'Rights Holder'), array('all' => true));
@@ -174,7 +180,7 @@ if ($files) {
 
     	<?php if ($dc_relation && $item_from_dastum): ?>
 			<div class="element-text">Cet enregistrement fait partie de l'enquête : <?php echo implode(" / ", $dc_relation); ?></div>
-    	<?php endif; ?>
+			<?php endif; ?>
 
     	<?php if ($dc_creator && $item_from_dastum): ?>
     		<h4>Collecteur(s) et interprète(s)</h4>
@@ -329,20 +335,59 @@ if ($files) {
 			<div class="element-text"><?php echo implode(" / ", $dc_source); ?></div>
     	<?php endif; ?>
 
-			<?php if ($dc_is_referenced_by): ?>
-    		<h4>Référencé par</h4>
-			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_referenced_by) . "</p>"; ?></div>
+			<?php if ($dc_bibliographic_citation): ?>
+    		<h4>Bibliographie</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_bibliographic_citation) . "</p>"; ?></div>
+    	<?php endif; ?>
+
+		<?php if ($dc_relation && !$item_from_dastum): ?>
+			<h4>Document(s) liés</h4>
+		<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_relation) . "</p>"; ?></div>
+		<?php endif; ?>
+
+		<?php // Les éléments qui suivent sont des sous-propriétés de dc:relation ?>
+
+		<?php if ($dc_has_part): ?>
+			<h4>A pour partie</h4>
+		<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_has_part) . "</p>"; ?></div>
+		<?php endif; ?>
+
+			<?php if ($dc_is_part_of): ?>
+    		<h4>Est une partie de </h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_part_of) . "</p>"; ?></div>
     	<?php endif; ?>
 
 			<?php if ($dc_has_format): ?>
-    		<h4>Autres formats</h4>
+    		<h4>A pour autre(s) format(s)</h4>
 			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_has_format) . "</p>"; ?></div>
     	<?php endif; ?>
 
+			<?php if ($dc_is_format_of): ?>
+    		<h4>Est un autre format de</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_format_of) . "</p>"; ?></div>
+    	<?php endif; ?>
+
 			<?php if ($dc_has_version): ?>
-    		<h4>Autres versions</h4>
+    		<h4>A pour autres versions</h4>
 			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_has_version) . "</p>"; ?></div>
     	<?php endif; ?>
+
+			<?php if ($dc_is_version_of): ?>
+    		<h4>Est une autre version de</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_version_of) . "</p>"; ?></div>
+    	<?php endif; ?>
+
+			<?php if ($dc_references): ?>
+    		<h4>Référence</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_references) . "</p>"; ?></div>
+    	<?php endif; ?>
+
+			<?php if ($dc_is_referenced_by): ?>
+    		<h4>Est référencé par</h4>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_is_referenced_by) . "</p>"; ?></div>
+    	<?php endif; ?>
+
+			<?php // fin des sous-propriéts de dc:relation ?>
 
 			<?php if ($dc_type): ?>
     		<h4>Type(s) du document</h4>
