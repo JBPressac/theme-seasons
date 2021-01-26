@@ -19,6 +19,7 @@
 	$dc_is_part_of = metadata('item', array('Dublin Core', 'Is Part Of'), array('all' => true));
 	$dc_is_version_of = metadata('item', array('Dublin Core', 'Is Version Of'), array('all' => true));
 	$dc_language = metadata('item', array('Dublin Core', 'Language'), array('all' => true));
+	$dc_license = metadata('item', array('Dublin Core', 'License'), array('all' => true));
 	$dc_medium = metadata('item', array('Dublin Core', 'Medium'), array('all' => true));
 	$dc_provenance = metadata('item', array('Dublin Core', 'Provenance'), array('all' => true));
 	$dc_publisher = metadata('item', array('Dublin Core', 'Publisher'), array('all' => true));
@@ -397,6 +398,11 @@ if ($files || !empty($matches)) {
 			<?php else: ?>
 				<div class="element-text"><?php echo implode(" / ", $dc_rights_holder); ?></div>
 			<?php endif; ?>
+    	<?php endif; ?>
+
+			<?php if ($dc_publisher): ?>
+    		<h4>Licence>/h4>
+			<div class="element-text"><?php echo implode(" / ", $dc_license); ?></div>
     	<?php endif; ?>
 
     	<?php if ($item_from_cocoon && $cocoon_document_url) {
