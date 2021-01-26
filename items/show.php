@@ -400,9 +400,9 @@ if ($files || !empty($matches)) {
 			<?php endif; ?>
     	<?php endif; ?>
 
-			<?php if ($dc_publisher): ?>
+			<?php if ($dc_license): ?>
     		<h4>Licence>/h4>
-			<div class="element-text"><?php echo implode(" / ", $dc_license); ?></div>
+			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_license) . "</p>"; ?></div>
     	<?php endif; ?>
 
     	<?php if ($item_from_cocoon && $cocoon_document_url) {
