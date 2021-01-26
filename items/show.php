@@ -401,7 +401,7 @@ if ($files || !empty($matches)) {
     	<?php endif; ?>
 
 			<?php if ($dc_license): ?>
-    		<h4>Licence>/h4>
+    		<h4>Licence d'utilisation</h4>
 			<div class="element-text"><?php echo "<p>" . implode(" </p><p> ", $dc_license) . "</p>"; ?></div>
     	<?php endif; ?>
 
